@@ -6,7 +6,7 @@ class ExerciseTile extends StatelessWidget {
   final String reps;
   final String sets;
   final bool isCompleted;
-  void Function(bool?)? onCheckboxChanged;
+  final void Function(bool?)? onCheckboxChanged;
 
   ExerciseTile({
     super.key, 
