@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:workout_tracker/data/hive_database.dart';
 import 'package:workout_tracker/models/exercise.dart';
 
 import '../models/workout.dart';
 
 class WorkoutData extends ChangeNotifier {
+
+  final db = HiveDatabase();
+
+  //Default workout list
   List<Workout> workoutList = [
     Workout(
       name: "Upper Body", 
@@ -28,6 +33,16 @@ class WorkoutData extends ChangeNotifier {
       ],
     )
   ];
+
+  //If there is a HIVE box get data otherwise use default list
+  void initalizeWorkoutList(){
+    if(db.previousDataExists()){
+      workoutList = db.readFromDatabase();
+    }
+    else{
+      db.saveToDatabase(workoutList);
+    }
+  }
 
   //Get Workouts
   List<Workout> getWorkoutList(){

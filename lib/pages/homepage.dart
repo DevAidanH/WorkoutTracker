@@ -11,6 +11,13 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+
+  void initState(){
+    super.initState();
+
+    Provider.of<WorkoutData>(context, listen: false).initalizeWorkoutList();
+  }
+
   //Text controller to access user inputted text
   final newWorkoutNameController = TextEditingController();
 

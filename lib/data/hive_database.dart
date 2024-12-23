@@ -45,6 +45,33 @@ class HiveDatabase {
   }
 
   //Read data
+  List<Workout> readFromDatabase(){
+    List<Workout> mySavedWorkouts = [];
+
+    List<String> workoutNames = _myBox.get("WORKOUTS");
+    List<String> exerciseDetails = _myBox.get("EXERCISES");
+
+    for (int i=0; i<workoutNames.length; i++){
+      List<Exercise> exerciesInEachWorkout = [];
+
+      for(int j =0; j<exerciseDetails.length; j++){
+        exerciesInEachWorkout.add(
+          Exercise(
+            name: exerciseDetails[i][j][0], 
+            weight: exerciseDetails[i][j][1], 
+            reps: exerciseDetails[i][j][2], 
+            sets: exerciseDetails[i][j][3],
+            isCompleted: exerciseDetails[i][j][4] == "true" ? true : false,
+          )
+        );
+      }
+      Workout workout = Workout(name: workoutNames[i], exercises: exerciesInEachWorkout);
+
+      mySavedWorkouts.add(workout);
+    }
+
+    return mySavedWorkouts;
+  }
 
   //Check exercises done
   bool exerciseCompleted(List<Workout> workouts){
@@ -59,6 +86,10 @@ class HiveDatabase {
   }
 
   //Return completed status of given date
+  int getCompletionStatus(String yyyymmdd){
+    int completionStatus = _myBox.get("COMPLETION_STATUS_$yyyymmdd") ?? 0;
+    return completionStatus;
+  }
 
   //Convert workouts objects into lists
   List<String> convertObjectToWorkoutLi(List<Workout> workouts) {
