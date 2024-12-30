@@ -5,7 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveDatabase {
   //Ref hive box
-  final _myBox = Hive.box("workout_database");
+  final _myBox = Hive.box("workout_database3");
 
   //Check if data stored
   bool previousDataExists(){
@@ -49,12 +49,12 @@ class HiveDatabase {
     List<Workout> mySavedWorkouts = [];
 
     List<String> workoutNames = _myBox.get("WORKOUTS");
-    List<String> exerciseDetails = _myBox.get("EXERCISES");
+    final exerciseDetails = _myBox.get("EXERCISES");
 
     for (int i=0; i<workoutNames.length; i++){
       List<Exercise> exerciesInEachWorkout = [];
 
-      for(int j =0; j<exerciseDetails.length; j++){
+      for(int j =0; j<exerciseDetails[i].length; j++){
         exerciesInEachWorkout.add(
           Exercise(
             name: exerciseDetails[i][j][0], 
@@ -95,7 +95,7 @@ class HiveDatabase {
   List<String> convertObjectToWorkoutLi(List<Workout> workouts) {
     List<String> workoutList = [];
 
-    for(int i = 0; 1 < workouts.length; i++){
+    for(int i = 0; i < workouts.length; i++){
       workoutList.add(workouts[i].name);
     }
 

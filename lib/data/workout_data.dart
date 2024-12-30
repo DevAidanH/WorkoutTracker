@@ -61,6 +61,9 @@ class WorkoutData extends ChangeNotifier {
     workoutList.add(Workout(name: name, exercises: []));
 
     notifyListeners();
+
+    //Save to db
+    db.saveToDatabase(workoutList);
   }
 
   // Add exercise to workout
@@ -70,6 +73,9 @@ class WorkoutData extends ChangeNotifier {
     relevantWorkout.exercises.add(Exercise(name: exerciseName, weight: weight, reps: reps, sets: sets));
 
     notifyListeners();
+
+    //save to database
+    db.saveToDatabase(workoutList);
   }
 
   //Check off exercise
@@ -79,6 +85,9 @@ class WorkoutData extends ChangeNotifier {
     relevantExercise.isCompleted = !relevantExercise.isCompleted;
 
     notifyListeners();
+
+    //save to database
+    db.saveToDatabase(workoutList);
   }
 
   //Returns relevant workout 
