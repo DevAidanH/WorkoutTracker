@@ -78,7 +78,9 @@ class _HomepageState extends State<Homepage> {
       builder: (context, value, child) => Scaffold(
         backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: const Text("Workout Tracker"),
+        backgroundColor: Colors.grey[400],
+        centerTitle: true,
+        title: const Text("Workout Tracker", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewWorkout,
@@ -89,7 +91,23 @@ class _HomepageState extends State<Homepage> {
           //Heatmap
           myHeatmap(datasets: value.heatMapDataSet),
 
-          //Workouts
+          //Text bar
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [ 
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  "My Workouts", 
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
+                ),
+              ),
+            ]
+          ),
+
+          //Workouts  
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),

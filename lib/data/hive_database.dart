@@ -32,8 +32,8 @@ class HiveDatabase {
 
     //Check if any exercises are set to completed
     //Will put 0 or 1 for each date a workout is completed 
-    if (exerciseCompleted(workouts)){
-      _myBox.put("COMPLETION_STATUS_${todaysDateYYYYMMDD()}", 1);
+    if (exerciseCompleted(workouts) > 0){
+      _myBox.put("COMPLETION_STATUS_${todaysDateYYYYMMDD()}", exerciseCompleted(workouts));
     }
     else{
       _myBox.put("COMPLETION_STATUS_${todaysDateYYYYMMDD()}", 0);
@@ -74,15 +74,16 @@ class HiveDatabase {
   }
 
   //Check exercises done
-  bool exerciseCompleted(List<Workout> workouts){
+  int exerciseCompleted(List<Workout> workouts){
+    var c = 0;
     for (var workout in workouts){
       for (var exercise in workout.exercises){
         if (exercise.isCompleted){
-          return true;
+          c++;
         }
       }
     }
-    return false;
+    return c;
   }
 
   //Return completed status of given date

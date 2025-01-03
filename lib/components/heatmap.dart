@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
-//import 'package:workout_tracker/datetime/datetime.dart';
 
 class myHeatmap extends StatelessWidget {
   final Map<DateTime, int>? datasets;
-  //final String startDateYYYYMMDD;
 
   const myHeatmap({
     super.key,
     required this.datasets,
-    //required this.startDateYYYYMMDD
   });
 
   @override
@@ -22,11 +19,14 @@ class myHeatmap extends StatelessWidget {
         showColorTip: false,
         margin: EdgeInsets.all(2),
         size: 45,
-        textColor: Colors.white,
-        defaultColor: Colors.grey,
+        textColor: Colors.black,
+        defaultColor: Colors.grey[400],
         weekTextColor: Colors.black,
         colorsets: const{
-          1: Colors.green,
+          1: Color(0xFFA3EE5B),
+          2: Color(0xFF66D855),
+          3: Color(0xFF40BA0F),
+          4: Color(0xFF188300)
         }
       ),
     );
