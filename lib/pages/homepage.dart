@@ -76,7 +76,7 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Consumer<WorkoutData>(
       builder: (context, value, child) => Scaffold(
-        backgroundColor: Colors.grey[500],
+        backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: const Text("Workout Tracker"),
       ),
@@ -87,7 +87,7 @@ class _HomepageState extends State<Homepage> {
       body: ListView(
         children: [
           //Heatmap
-          myHeatmap(datasets: value.heatMapDataSet, startDateYYYYMMDD: value.getStartDate()),
+          myHeatmap(datasets: value.heatMapDataSet),
 
           //Workouts
           ListView.builder(
