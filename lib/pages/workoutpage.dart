@@ -93,6 +93,7 @@ class _WorkoutpageState extends State<Workoutpage> {
             sets: value.getRelevantWorkout(widget.workoutName).exercises[index].sets, 
             isCompleted: value.getRelevantWorkout(widget.workoutName).exercises[index].isCompleted,
             onCheckboxChanged: (val) => onCheckBoxChange(widget.workoutName, value.getRelevantWorkout(widget.workoutName).exercises[index].name),
+            workoutContainingExerciseName: widget.workoutName
           )
     )
     )

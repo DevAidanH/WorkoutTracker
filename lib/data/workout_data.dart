@@ -69,6 +69,28 @@ class WorkoutData extends ChangeNotifier {
     db.saveToDatabase(workoutList);
   }
 
+  //Delete workout
+  void deleteWorkout (String name){
+    //Working delete function but not very effiective
+    for (int i=0; i<workoutList.length; i++){
+      if(workoutList[i].name.contains(name)){
+        workoutList.removeAt(i);
+      }
+    }
+    
+    notifyListeners();
+    loadHeatMap();
+    db.saveToDatabase(workoutList);
+  }
+
+  void editworkout (String name){
+    //Working in progress
+
+    notifyListeners();
+    loadHeatMap();
+    db.saveToDatabase(workoutList);
+  }
+
   // Add exercise to workout
   void addExercise(String workoutName, String exerciseName, String weight, String reps, String sets){
     Workout relevantWorkout = getRelevantWorkout(workoutName);
@@ -78,6 +100,21 @@ class WorkoutData extends ChangeNotifier {
     notifyListeners();
 
     //save to database
+    db.saveToDatabase(workoutList);
+  }
+
+  //Delete exercise
+  void deleteExercise(String workoutName, String exerciseName){
+    Exercise relevantExercise = getRelevantExercise(workoutName, exerciseName);
+
+    Workout relevantWorkout = getRelevantWorkout(workoutName);
+
+    if(relevantWorkout.exercises.contains(relevantExercise)){
+      relevantWorkout.exercises.remove(relevantExercise);
+    }
+
+    notifyListeners();
+    loadHeatMap();
     db.saveToDatabase(workoutList);
   }
 

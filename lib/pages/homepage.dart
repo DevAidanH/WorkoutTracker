@@ -114,9 +114,22 @@ class _HomepageState extends State<Homepage> {
             itemCount: value.getWorkoutList().length,
             itemBuilder: (context, index) => ListTile(
             title: Text(value.getWorkoutList()[index].name),
-            trailing: IconButton(
-              onPressed: () => goToWorkoutPage(value.getWorkoutList()[index].name),
-              icon: Icon(Icons.arrow_forward_ios)
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () => value.deleteWorkout(value.getWorkoutList()[index].name),
+                ),
+                IconButton(
+                  onPressed: () => goToWorkoutPage(value.getWorkoutList()[index].name),
+                  icon: Icon(Icons.arrow_forward_ios)
+                ),
+              ],
             ),
           )),
         ],

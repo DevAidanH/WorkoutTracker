@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:workout_tracker/data/workout_data.dart';
 
 class ExerciseTile extends StatelessWidget {
   final String exerciseName;
@@ -7,6 +9,7 @@ class ExerciseTile extends StatelessWidget {
   final String sets;
   final bool isCompleted;
   final void Function(bool?)? onCheckboxChanged;
+  final String workoutContainingExerciseName;
 
   ExerciseTile({
     super.key, 
@@ -15,12 +18,14 @@ class ExerciseTile extends StatelessWidget {
     required this.reps, 
     required this.sets, 
     required this.isCompleted,
-    required this. onCheckboxChanged
+    required this. onCheckboxChanged,
+    required this.workoutContainingExerciseName
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Consumer<WorkoutData>(
+      builder: (context, value, child) => Container(
             color: Colors.blue,
             child: ListTile(
               title: Text(exerciseName),
@@ -40,8 +45,22 @@ class ExerciseTile extends StatelessWidget {
                     )
                   ],
                 ),
-                trailing: Checkbox(value: isCompleted, onChanged: (value) => onCheckboxChanged!(value)),
+                trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () => value.deleteExercise(workoutContainingExerciseName, exerciseName),
+                ),
+                Checkbox(value: isCompleted, onChanged: (value) => onCheckboxChanged!(value)),
+              ],
             ),
+            ),
+      )
       );
   }
 }
