@@ -119,11 +119,11 @@ class _HomepageState extends State<Homepage> {
               children: [
                 IconButton(
                   icon: Icon(Icons.edit),
-                  onPressed: () {},
+                  onPressed: () => value.editworkout(value.getWorkoutList()[index].name, context),
                 ),
                 IconButton(
                   icon: Icon(Icons.delete),
-                  onPressed: () => value.deleteWorkout(value.getWorkoutList()[index].name),
+                  onPressed: () => value.deleteWorkout(value.getWorkoutList()[index].name, context),
                 ),
                 IconButton(
                   onPressed: () => goToWorkoutPage(value.getWorkoutList()[index].name),

@@ -50,11 +50,11 @@ class ExerciseTile extends StatelessWidget {
               children: [
                 IconButton(
                   icon: Icon(Icons.edit),
-                  onPressed: () {},
+                  onPressed: () => value.editExercise(workoutContainingExerciseName, exerciseName, context),
                 ),
                 IconButton(
                   icon: Icon(Icons.delete),
-                  onPressed: () => value.deleteExercise(workoutContainingExerciseName, exerciseName),
+                  onPressed: () => value.deleteExercise(workoutContainingExerciseName, exerciseName, context),
                 ),
                 Checkbox(value: isCompleted, onChanged: (value) => onCheckboxChanged!(value)),
               ],

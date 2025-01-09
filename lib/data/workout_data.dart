@@ -70,25 +70,64 @@ class WorkoutData extends ChangeNotifier {
   }
 
   //Delete workout
-  void deleteWorkout (String name){
-    //Working delete function but not very effiective
-    for (int i=0; i<workoutList.length; i++){
-      if(workoutList[i].name.contains(name)){
-        workoutList.removeAt(i);
-      }
-    }
-    
-    notifyListeners();
-    loadHeatMap();
-    db.saveToDatabase(workoutList);
+  void deleteWorkout (String name, context){
+    Workout relevantWorkout = getRelevantWorkout(name);
+    showDialog(
+      context: context, 
+      builder: (context) => AlertDialog(
+        title: Text("Are you sure you want to delete this workout?"),
+        actions: [
+          MaterialButton(
+            onPressed: (){
+              workoutList.remove(relevantWorkout);
+              notifyListeners();
+              db.saveToDatabase(workoutList);
+              loadHeatMap();
+              Navigator.pop(context);
+            },
+            child: Text("Delete"),
+          ),
+          MaterialButton(
+            onPressed: (){Navigator.pop(context);},
+            child: Text("Cancel"),
+          )
+        ],
+      )
+    );
   }
 
-  void editworkout (String name){
+  void editworkout (String name, context){
     //Working in progress
+    final editWorkoutNameController = TextEditingController(text: name);
+    Workout relevantWorkout = getRelevantWorkout(name);
 
-    notifyListeners();
-    loadHeatMap();
-    db.saveToDatabase(workoutList);
+    showDialog(
+      context: context, 
+      builder: (context) => AlertDialog(
+        title: Text("Edit Workout"),
+        content: TextField(
+          controller: editWorkoutNameController,
+        ),
+        actions: [
+          MaterialButton(
+            onPressed: (){
+                  relevantWorkout.name = editWorkoutNameController.text;
+                  notifyListeners();
+                  db.saveToDatabase(workoutList);
+                  loadHeatMap();
+                  Navigator.pop(context);
+            }, 
+            child: Text("Save changes")
+          ),
+          MaterialButton(
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
+            child: Text("Cancel"),
+          )
+        ],
+        )
+    );
   }
 
   // Add exercise to workout
@@ -104,18 +143,77 @@ class WorkoutData extends ChangeNotifier {
   }
 
   //Delete exercise
-  void deleteExercise(String workoutName, String exerciseName){
+  void deleteExercise(String workoutName, String exerciseName, context){
     Exercise relevantExercise = getRelevantExercise(workoutName, exerciseName);
-
     Workout relevantWorkout = getRelevantWorkout(workoutName);
 
-    if(relevantWorkout.exercises.contains(relevantExercise)){
-      relevantWorkout.exercises.remove(relevantExercise);
-    }
+    showDialog(
+      context: context, 
+      builder: (context) => AlertDialog(
+        title: Text("Are you sure you want to delete this exercise?"),
+        actions: [
+          MaterialButton(
+            onPressed: (){
+              relevantWorkout.exercises.remove(relevantExercise);
+              notifyListeners();
+              db.saveToDatabase(workoutList);
+              loadHeatMap();
+              Navigator.pop(context);
+            },
+            child: Text("Delete"),
+          ),
+          MaterialButton(
+            onPressed: (){Navigator.pop(context);},
+            child: Text("Cancel"),
+          )
+        ],
+      )
+    );
+  }
 
-    notifyListeners();
-    loadHeatMap();
-    db.saveToDatabase(workoutList);
+  void editExercise(String workoutName, String exerciseName, context){
+    Exercise relevantExercise = getRelevantExercise(workoutName, exerciseName);
+
+      final exerciseNameController = TextEditingController(text: relevantExercise.name);
+      final weightNameController = TextEditingController(text: relevantExercise.weight);
+      final repsNameController = TextEditingController(text: relevantExercise.reps);
+      final setsNameController = TextEditingController(text: relevantExercise.sets);
+
+      showDialog(
+        context: context, 
+        builder: (context) => AlertDialog(
+          title: Text("Edit exercise"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(controller: exerciseNameController,),
+              TextField(controller: weightNameController,),
+              TextField(controller: repsNameController,),
+              TextField(controller: setsNameController,),
+            ],
+          ),
+          actions: [
+            MaterialButton(
+              onPressed: (){
+                relevantExercise.name = exerciseNameController.text;
+                relevantExercise.weight = weightNameController.text;
+                relevantExercise.reps = repsNameController.text;
+                relevantExercise.sets = setsNameController.text;
+                relevantExercise.isCompleted = false;
+                
+                notifyListeners();
+                db.saveToDatabase(workoutList);
+                loadHeatMap();
+                Navigator.pop(context);
+              },
+              child: Text("Save"),
+            ),
+            MaterialButton(onPressed: (){Navigator.pop(context);},
+              child: Text("Cancel"),
+            )
+          ],
+        )
+      );
   }
 
   //Check off exercise
