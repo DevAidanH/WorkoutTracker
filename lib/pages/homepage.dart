@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_tracker/components/heatmap.dart';
+import 'package:workout_tracker/components/workout_tile.dart';
 import 'package:workout_tracker/data/workout_data.dart';
-import 'workoutpage.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -48,9 +48,9 @@ class _HomepageState extends State<Homepage> {
   }
 
   //Go to workout page
-  void goToWorkoutPage(String workoutName){
+  /*void goToWorkoutPage(String workoutName){
     Navigator.push(context, MaterialPageRoute(builder: (context) => Workoutpage(workoutName: workoutName,)));
-  }
+  }*/
 
   //Save workout
   void save(){
@@ -76,62 +76,25 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Consumer<WorkoutData>(
       builder: (context, value, child) => Scaffold(
-        backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        backgroundColor: Colors.grey[400],
-        centerTitle: true,
-        title: const Text("Workout Tracker", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
-      ),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         onPressed: createNewWorkout,
-        child: Icon(Icons.add)
+        shape: CircleBorder(),
+        child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),
       ),
       body: ListView(
         children: [
           //Heatmap
           myHeatmap(datasets: value.heatMapDataSet),
 
-          //Text bar
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [ 
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Text(
-                  "My Workouts", 
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
-                ),
-              ),
-            ]
-          ),
-
           //Workouts  
           ListView.builder(
-            shrinkWrap: true,
+            shrinkWrap: true, 
+            padding: EdgeInsets.all(30),
             physics: const NeverScrollableScrollPhysics(),
             itemCount: value.getWorkoutList().length,
-            itemBuilder: (context, index) => ListTile(
-            title: Text(value.getWorkoutList()[index].name),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () => value.editworkout(value.getWorkoutList()[index].name, context),
-                ),
-                IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () => value.deleteWorkout(value.getWorkoutList()[index].name, context),
-                ),
-                IconButton(
-                  onPressed: () => goToWorkoutPage(value.getWorkoutList()[index].name),
-                  icon: Icon(Icons.arrow_forward_ios)
-                ),
-              ],
-            ),
-          )),
+            itemBuilder: (context, index) => WorkoutTile(workoutName: value.getWorkoutList()[index].name)
+          ),
         ],
       )
     )

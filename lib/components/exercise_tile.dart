@@ -26,22 +26,28 @@ class ExerciseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<WorkoutData>(
       builder: (context, value, child) => Container(
-            color: Colors.blue,
+            color: isCompleted ? Theme.of(context).colorScheme.secondary : Theme.of(context).colorScheme.primary,
+            margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
             child: ListTile(
-              title: Text(exerciseName),
+              onTap: () => onCheckboxChanged!(isCompleted),
+              contentPadding: EdgeInsets.all(10),
+              title: Text(exerciseName.toUpperCase(), style: Theme.of(context).textTheme.displayLarge),
                 subtitle: Row(
                   children: [
-                    Chip(label: Text(
-                      "${weight}kg",
-                      ) 
+                    Chip(
+                      label: Text("${weight}kg", style: Theme.of(context).textTheme.displaySmall,), 
+                      backgroundColor: Theme.of(context).colorScheme.tertiary,
+                      padding: EdgeInsets.all(0),
                     ),
-                    Chip(label: Text(
-                      "${reps} reps",
-                      )
+                    Chip(
+                      label: Text("${reps} reps", style: Theme.of(context).textTheme.displaySmall), 
+                      backgroundColor: Theme.of(context).colorScheme.tertiary,
+                      padding: EdgeInsets.all(0),
                     ),
-                    Chip(label: Text(
-                      "${sets} sets",
-                      )
+                    Chip(
+                      label: Text("${sets} sets", style: Theme.of(context).textTheme.displaySmall), 
+                      backgroundColor: Theme.of(context).colorScheme.tertiary,
+                      padding: EdgeInsets.all(0),
                     )
                   ],
                 ),
@@ -56,7 +62,7 @@ class ExerciseTile extends StatelessWidget {
                   icon: Icon(Icons.delete),
                   onPressed: () => value.deleteExercise(workoutContainingExerciseName, exerciseName, context),
                 ),
-                Checkbox(value: isCompleted, onChanged: (value) => onCheckboxChanged!(value)),
+                //Checkbox(value: isCompleted, onChanged: (value) => onCheckboxChanged!(value)),
               ],
             ),
             ),

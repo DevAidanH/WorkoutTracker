@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-//import 'package:workout_tracker/data/hive_database.dart';
 import 'package:workout_tracker/data/workout_data.dart';
+import 'package:workout_tracker/themes/themes.dart';
 import 'pages/homepage.dart';
 
 void main() async {
@@ -23,8 +23,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(create: (context) => WorkoutData(),
-    child: const MaterialApp(
+    child: MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: "Workout Tracker",
+      theme: lightmode,
       home: Homepage(),
     ),);
   }

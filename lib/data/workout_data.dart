@@ -206,7 +206,7 @@ class WorkoutData extends ChangeNotifier {
                 loadHeatMap();
                 Navigator.pop(context);
               },
-              child: Text("Save"),
+              child: Text("Save changes"),
             ),
             MaterialButton(onPressed: (){Navigator.pop(context);},
               child: Text("Cancel"),

@@ -52,17 +52,42 @@ class _WorkoutpageState extends State<Workoutpage> {
   void newExercise (){
     showDialog(context: context, builder: (context) => AlertDialog(
       title: Text("Add new exercise"),
+      backgroundColor: Colors.grey[300],
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           //Name
-          TextField(controller: exerciseNameController,),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: TextField(
+              controller: exerciseNameController, 
+              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter the exercise name here..."),
+            ),
+          ),
           //Weight
-          TextField(controller: weightNameController,),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: TextField(
+              controller: weightNameController,
+              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter the weight here..."),
+            ),
+          ),
           //Reps
-          TextField(controller: repsNameController,),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: TextField(
+              controller: repsNameController,
+              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter how many reps here..."),
+            ),
+          ),
           //Sets
-          TextField(controller: setsNameController,)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: TextField(
+              controller: setsNameController,
+              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter how many sets here..."),
+            ),
+          )
         ],
       ),
       actions: [
@@ -78,11 +103,14 @@ class _WorkoutpageState extends State<Workoutpage> {
   Widget build(BuildContext context) {
     return Consumer<WorkoutData>(builder: (context, value, child) => Scaffold(
       appBar: AppBar(
-        title: Text(widget.workoutName),
+        title: Text(widget.workoutName.toUpperCase(), style: Theme.of(context).textTheme.titleLarge,),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => newExercise(),
-        child: Icon(Icons.add),
+        shape: CircleBorder(),
+        child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),
       ),
       body: ListView.builder(
           itemCount: value.numberOfExerciseInWorkout(widget.workoutName),
