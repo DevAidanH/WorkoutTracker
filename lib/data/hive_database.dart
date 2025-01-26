@@ -10,12 +10,11 @@ class HiveDatabase {
   //Check if data stored
   bool previousDataExists(){
     if(_myBox.isEmpty){
-      print("Previous data does NOT exist");
       _myBox.put("START_DATE", todaysDateYYYYMMDD());
+      _myBox.put("LAST_LOGIN", todaysDateYYYYMMDD());
       return false;
     }
     else{
-      print("Previous data does exist");
       return true;
     }
   }
@@ -24,6 +23,17 @@ class HiveDatabase {
   String getStartDate(){
     return _myBox.get("START_DATE");
   }
+
+  //Return last login
+  String getLastLogin(){
+    return _myBox.get("LAST_LOGIN");
+  }
+
+  //Update last login
+  void updateLastLogin(lastLogin){
+    _myBox.put("LAST_LOGIN", lastLogin);
+  }
+
   //Write data
   void saveToDatabase(List<Workout> workouts){
     //Convert objects into strings to store

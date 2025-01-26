@@ -39,6 +39,17 @@ class WorkoutData extends ChangeNotifier {
   void initalizeWorkoutList(){
     if(db.previousDataExists()){
       workoutList = db.readFromDatabase();
+      String lastLogin = db.getLastLogin();
+      if(lastLogin != todaysDateYYYYMMDD()){
+        lastLogin = todaysDateYYYYMMDD();
+        db.updateLastLogin(lastLogin);
+        for(int i=0; i<workoutList.length; i++){
+          for(int j=0; j<workoutList[i].exercises.length; j++){
+            workoutList[i].exercises[j].isCompleted = false;
+          }
+        }
+        db.saveToDatabase(workoutList);
+      }
     }
     else{
       db.saveToDatabase(workoutList);

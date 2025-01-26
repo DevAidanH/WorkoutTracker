@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_tracker/data/workout_data.dart';
+import 'package:workout_tracker/pages/login.dart';
 import 'package:workout_tracker/themes/themes.dart';
 import 'pages/homepage.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Workout Tracker",
       theme: lightmode,
-      home: Homepage(),
+      home: login(),
     ),);
   }
 }
