@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:workout_tracker/data/workout_data.dart';
 import 'package:workout_tracker/pages/login.dart';
 import 'package:workout_tracker/themes/themes.dart';
-import 'pages/homepage.dart';
 
 void main() async {
   //Init HIve - local storage

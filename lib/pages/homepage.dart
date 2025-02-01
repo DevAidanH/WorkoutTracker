@@ -27,20 +27,22 @@ class _HomepageState extends State<Homepage> {
     showDialog(
       context: context, 
       builder: (context) => AlertDialog(
-        title: Text("Create New Workout"),
+        title: Text("Create New Workout", style: Theme.of(context).textTheme.displayLarge),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         content: TextField(
           controller: newWorkoutNameController,
+          decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter workout name here...", labelStyle: Theme.of(context).textTheme.displaySmall),
         ),
         actions: [
           //Save button
           MaterialButton(
             onPressed: save, 
-            child: Text("Save")
+            child: Text("Save", style: Theme.of(context).textTheme.displaySmall,)
           ),
           //Cancel button
           MaterialButton(
             onPressed: cancel, 
-            child: Text("Cancel"),
+            child: Text("Cancel", style: Theme.of(context).textTheme.displaySmall,),
           )
         ],
         )

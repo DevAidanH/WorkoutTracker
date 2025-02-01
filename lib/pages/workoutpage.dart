@@ -58,7 +58,7 @@ class _WorkoutpageState extends State<Workoutpage> {
         children: [
           //Name
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 5),
             child: TextField(
               controller: exerciseNameController, 
               decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter the exercise name here..."),
@@ -66,7 +66,7 @@ class _WorkoutpageState extends State<Workoutpage> {
           ),
           //Weight
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 5),
             child: TextField(
               controller: weightNameController,
               decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter the weight here..."),
@@ -74,7 +74,7 @@ class _WorkoutpageState extends State<Workoutpage> {
           ),
           //Reps
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 5),
             child: TextField(
               controller: repsNameController,
               decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter how many reps here..."),
@@ -82,7 +82,7 @@ class _WorkoutpageState extends State<Workoutpage> {
           ),
           //Sets
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 5),
             child: TextField(
               controller: setsNameController,
               decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter how many sets here..."),
@@ -112,18 +112,21 @@ class _WorkoutpageState extends State<Workoutpage> {
         shape: CircleBorder(),
         child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),
       ),
-      body: ListView.builder(
-          itemCount: value.numberOfExerciseInWorkout(widget.workoutName),
-          itemBuilder: (context, index) => ExerciseTile(
-            exerciseName: value.getRelevantWorkout(widget.workoutName).exercises[index].name, 
-            weight: value.getRelevantWorkout(widget.workoutName).exercises[index].weight, 
-            reps: value.getRelevantWorkout(widget.workoutName).exercises[index].reps, 
-            sets: value.getRelevantWorkout(widget.workoutName).exercises[index].sets, 
-            isCompleted: value.getRelevantWorkout(widget.workoutName).exercises[index].isCompleted,
-            onCheckboxChanged: (val) => onCheckBoxChange(widget.workoutName, value.getRelevantWorkout(widget.workoutName).exercises[index].name),
-            workoutContainingExerciseName: widget.workoutName
-          )
-    )
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
+        child: ListView.builder(
+            itemCount: value.numberOfExerciseInWorkout(widget.workoutName),
+            itemBuilder: (context, index) => ExerciseTile(
+              exerciseName: value.getRelevantWorkout(widget.workoutName).exercises[index].name, 
+              weight: value.getRelevantWorkout(widget.workoutName).exercises[index].weight, 
+              reps: value.getRelevantWorkout(widget.workoutName).exercises[index].reps, 
+              sets: value.getRelevantWorkout(widget.workoutName).exercises[index].sets, 
+              isCompleted: value.getRelevantWorkout(widget.workoutName).exercises[index].isCompleted,
+              onCheckboxChanged: (val) => onCheckBoxChange(widget.workoutName, value.getRelevantWorkout(widget.workoutName).exercises[index].name),
+              workoutContainingExerciseName: widget.workoutName
+            )
+            ),
+      )
     )
     );
   }

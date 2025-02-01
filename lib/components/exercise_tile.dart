@@ -27,7 +27,7 @@ class ExerciseTile extends StatelessWidget {
     return Consumer<WorkoutData>(
       builder: (context, value, child) => Container(
             color: isCompleted ? Theme.of(context).colorScheme.secondary : Theme.of(context).colorScheme.primary,
-            margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+            margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             child: ListTile(
               onTap: () => onCheckboxChanged!(isCompleted),
               contentPadding: EdgeInsets.all(10),

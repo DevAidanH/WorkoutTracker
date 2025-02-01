@@ -15,6 +15,11 @@ ThemeData lightmode = ThemeData(
       fontWeight: FontWeight.bold,
       color: Color(0xFFBDBDBD)
     ),
+    displayMedium: GoogleFonts.poppins(
+      fontSize: 17.5,
+      fontWeight: FontWeight.bold,
+      color: Color(0xFFBDBDBD)
+    ),
     displaySmall: GoogleFonts.poppins(
       fontSize: 15,
       fontWeight: FontWeight.bold,

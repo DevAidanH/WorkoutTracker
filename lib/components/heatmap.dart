@@ -12,7 +12,7 @@ class myHeatmap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(25),
+      padding: EdgeInsets.symmetric(vertical: 25, horizontal: 0),
       child: HeatMapCalendar(
         datasets: datasets,
         colorMode: ColorMode.color,
