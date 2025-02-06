@@ -10,10 +10,10 @@ class login extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 100),
-            padding: EdgeInsets.all(0),
+            margin: EdgeInsets.only(top: 150),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
             child: Center(
-              child: Image.asset("lib/Images/logo.png"),
+              child: Image.asset("lib/Images/logoCut.png"),
             )
           ),
           Padding(padding: EdgeInsets.all(10), child: Text("LiftLog", style: Theme.of(context).textTheme.titleMedium,)),
