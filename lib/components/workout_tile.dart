@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_tracker/data/workout_data.dart';
 import 'package:workout_tracker/pages/workoutpage.dart';
@@ -15,12 +16,31 @@ class WorkoutTile extends StatelessWidget {
       builder: (context, value, child) => Card(
         color: Theme.of(context).colorScheme.primary,
         margin: EdgeInsets.all(10),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        child: ListTile(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+        child: Slidable(
+          endActionPane: ActionPane(
+            motion: StretchMotion(), 
+            children: [
+              SlidableAction(
+                onPressed: (context){
+                  value.editworkout(workoutName, context);
+                },
+                backgroundColor: Color(0xFF3d3d3d),
+                icon: (Icons.edit),
+                foregroundColor: Theme.of(context).colorScheme.surface,
+              ),
+              SlidableAction(
+                onPressed: (context){
+                  value.deleteWorkout(workoutName, context);
+                },
+                backgroundColor: Color(0xFFcf4742),
+                icon: Icons.delete,
+                foregroundColor: Theme.of(context).colorScheme.surface,
+              ),
+            ]
+          ),
+          child: ListTile(
           contentPadding: EdgeInsets.all(10),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Workoutpage(workoutName: workoutName,)));
-          },
           title: Padding(
             padding: EdgeInsets.symmetric(horizontal: 15), 
             child: Text(workoutName.toUpperCase(), style: Theme.of(context).textTheme.displayLarge)
@@ -29,22 +49,14 @@ class WorkoutTile extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () => value.editworkout(workoutName, context),
-                ),
-                IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () => value.deleteWorkout(workoutName, context),
-                ),
-                /*IconButton(
                   onPressed: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => Workoutpage(workoutName: workoutName,)));
                   },
                   icon: Icon(Icons.arrow_forward_ios), color: Theme.of(context).colorScheme.surface,
-                ), */
+                ), 
               ],
             ),
-        ),
+        )),
       )
     );
   }

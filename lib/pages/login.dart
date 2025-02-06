@@ -10,15 +10,23 @@ class login extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            margin: EdgeInsets.all(50), 
+            margin: EdgeInsets.only(top: 100),
+            padding: EdgeInsets.all(0),
+            child: Center(
+              child: Image.asset("lib/Images/logo.png"),
+            )
           ),
-          Padding(padding: EdgeInsets.all(20), child: Text("Welcome to LiftLog")),
-          GestureDetector(
-            child: Text("Click here to get started"),
-            onTap: (){
+          Padding(padding: EdgeInsets.all(10), child: Text("LiftLog", style: Theme.of(context).textTheme.titleMedium,)),
+          MaterialButton(
+            onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
             },
-          ),
+            child: Container(
+              color: Theme.of(context).colorScheme.primary,
+              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+              child: Text("Get Started", style: Theme.of(context).textTheme.displayLarge,)
+            )
+          )
         ],
       ),
     );

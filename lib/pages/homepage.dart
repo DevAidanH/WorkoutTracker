@@ -31,6 +31,7 @@ class _HomepageState extends State<Homepage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         content: TextField(
           controller: newWorkoutNameController,
+          style: TextStyle(color: Theme.of(context).colorScheme.surface),
           decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter workout name here...", labelStyle: Theme.of(context).textTheme.displaySmall),
         ),
         actions: [
@@ -48,11 +49,6 @@ class _HomepageState extends State<Homepage> {
         )
     );
   }
-
-  //Go to workout page
-  /*void goToWorkoutPage(String workoutName){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Workoutpage(workoutName: workoutName,)));
-  }*/
 
   //Save workout
   void save(){

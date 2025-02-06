@@ -20,13 +20,15 @@ class myHeatmap extends StatelessWidget {
         margin: EdgeInsets.all(2),
         size: 45,
         textColor: Colors.black,
-        defaultColor: Colors.grey[400],
+        defaultColor: Theme.of(context).colorScheme.surface,
         weekTextColor: Colors.black,
-        colorsets: const{
-          1: Color(0xFFA3EE5B),
-          2: Color(0xFF66D855),
-          3: Color(0xFF40BA0F),
-          4: Color(0xFF188300)
+        colorsets: {
+          1: Color(0xFF5DA349).withAlpha(43),
+          2: Color(0xFF5DA349).withAlpha(85),
+          3: Color(0xFF5DA349).withAlpha(128),
+          4: Color(0xFF5DA349).withAlpha(170),
+          5: Color(0xFF5DA349).withAlpha(213),
+          6: Color(0xFF5DA349).withAlpha(255),
         }
       ),
     );

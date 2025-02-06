@@ -29,6 +29,11 @@ ThemeData lightmode = ThemeData(
       fontSize: 25,
       fontWeight: FontWeight.bold,
       color: Color(0xFFBDBDBD)
+    ),
+    titleMedium: GoogleFonts.poppins(
+      fontSize: 60,
+      fontWeight: FontWeight.bold,
+      color: Color(0xFF292929)
     )
   )
 );

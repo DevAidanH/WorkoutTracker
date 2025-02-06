@@ -52,7 +52,8 @@ class _WorkoutpageState extends State<Workoutpage> {
   void newExercise (){
     showDialog(context: context, builder: (context) => AlertDialog(
       title: Text("Add new exercise"),
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      titleTextStyle: Theme.of(context).textTheme.displayLarge,
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -61,7 +62,8 @@ class _WorkoutpageState extends State<Workoutpage> {
             padding: const EdgeInsets.symmetric(vertical: 5),
             child: TextField(
               controller: exerciseNameController, 
-              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter the exercise name here..."),
+              style: TextStyle(color: Theme.of(context).colorScheme.surface),
+              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter the exercise name here...",labelStyle: Theme.of(context).textTheme.displaySmall),
             ),
           ),
           //Weight
@@ -69,7 +71,8 @@ class _WorkoutpageState extends State<Workoutpage> {
             padding: const EdgeInsets.symmetric(vertical: 5),
             child: TextField(
               controller: weightNameController,
-              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter the weight here..."),
+              style: TextStyle(color: Theme.of(context).colorScheme.surface),
+              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter the weight here...", labelStyle: Theme.of(context).textTheme.displaySmall),
             ),
           ),
           //Reps
@@ -77,7 +80,8 @@ class _WorkoutpageState extends State<Workoutpage> {
             padding: const EdgeInsets.symmetric(vertical: 5),
             child: TextField(
               controller: repsNameController,
-              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter how many reps here..."),
+              style: TextStyle(color: Theme.of(context).colorScheme.surface),
+              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter how many reps here...", labelStyle: Theme.of(context).textTheme.displaySmall),
             ),
           ),
           //Sets
@@ -85,16 +89,17 @@ class _WorkoutpageState extends State<Workoutpage> {
             padding: const EdgeInsets.symmetric(vertical: 5),
             child: TextField(
               controller: setsNameController,
-              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter how many sets here..."),
+              style: TextStyle(color: Theme.of(context).colorScheme.surface),
+              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter how many sets here...", labelStyle: Theme.of(context).textTheme.displaySmall),
             ),
           )
         ],
       ),
       actions: [
         //Save button
-        MaterialButton(onPressed: save, child: Text("Save"),),
+        MaterialButton(onPressed: save, child: Text("Save", style: Theme.of(context).textTheme.displaySmall),),
         //Cancel button
-        MaterialButton(onPressed: cancel, child: Text("Cancel"))
+        MaterialButton(onPressed: cancel, child: Text("Cancel", style: Theme.of(context).textTheme.displaySmall))
       ],
     ));
   }
