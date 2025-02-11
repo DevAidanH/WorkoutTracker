@@ -77,7 +77,7 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         onPressed: createNewWorkout,
-        shape: CircleBorder(),
+        shape: LinearBorder(),
         child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),
       ),
       body: ListView(

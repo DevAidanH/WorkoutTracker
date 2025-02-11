@@ -63,7 +63,7 @@ class _WorkoutpageState extends State<Workoutpage> {
             child: TextField(
               controller: exerciseNameController, 
               style: TextStyle(color: Theme.of(context).colorScheme.surface),
-              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter the exercise name here...",labelStyle: Theme.of(context).textTheme.displaySmall),
+              decoration: InputDecoration(border: UnderlineInputBorder(), hintText: "Enter the exercise name here...",hintStyle: Theme.of(context).textTheme.displaySmall),
             ),
           ),
           //Weight
@@ -72,7 +72,7 @@ class _WorkoutpageState extends State<Workoutpage> {
             child: TextField(
               controller: weightNameController,
               style: TextStyle(color: Theme.of(context).colorScheme.surface),
-              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter the weight here...", labelStyle: Theme.of(context).textTheme.displaySmall),
+              decoration: InputDecoration(border: UnderlineInputBorder(), hintText: "Enter the weight here...", hintStyle: Theme.of(context).textTheme.displaySmall),
             ),
           ),
           //Reps
@@ -81,7 +81,7 @@ class _WorkoutpageState extends State<Workoutpage> {
             child: TextField(
               controller: repsNameController,
               style: TextStyle(color: Theme.of(context).colorScheme.surface),
-              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter how many reps here...", labelStyle: Theme.of(context).textTheme.displaySmall),
+              decoration: InputDecoration(border: UnderlineInputBorder(), hintText: "Enter how many reps here...", hintStyle: Theme.of(context).textTheme.displaySmall),
             ),
           ),
           //Sets
@@ -90,7 +90,7 @@ class _WorkoutpageState extends State<Workoutpage> {
             child: TextField(
               controller: setsNameController,
               style: TextStyle(color: Theme.of(context).colorScheme.surface),
-              decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter how many sets here...", labelStyle: Theme.of(context).textTheme.displaySmall),
+              decoration: InputDecoration(border: UnderlineInputBorder(), hintText: "Enter how many sets here...", hintStyle: Theme.of(context).textTheme.displaySmall),
             ),
           )
         ],
@@ -114,7 +114,7 @@ class _WorkoutpageState extends State<Workoutpage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => newExercise(),
-        shape: CircleBorder(),
+        shape: LinearBorder(),
         child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),
       ),
       body: Padding(
