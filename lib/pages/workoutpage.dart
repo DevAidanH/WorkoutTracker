@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_tracker/components/exercise_tile.dart';
 import 'package:workout_tracker/data/workout_data.dart';
+import 'package:workout_tracker/models/exercise.dart';
 
 class Workoutpage extends StatefulWidget {
   final String workoutName;
@@ -50,58 +51,71 @@ class _WorkoutpageState extends State<Workoutpage> {
 
   //Adding a new exercise
   void newExercise (){
-    showDialog(context: context, builder: (context) => AlertDialog(
-      title: Text("Add new exercise"),
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      titleTextStyle: Theme.of(context).textTheme.displayLarge,
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          //Name
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
-            child: TextField(
-              controller: exerciseNameController, 
-              style: TextStyle(color: Theme.of(context).colorScheme.surface),
-              decoration: InputDecoration(border: UnderlineInputBorder(), hintText: "Enter the exercise name here...",hintStyle: Theme.of(context).textTheme.displaySmall),
+    showDialog(context: context, builder: (context) => SingleChildScrollView(
+      child: AlertDialog(
+        title: Text("Add new exercise"),
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            //Name
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: TextField(
+                controller: exerciseNameController, 
+                decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter the exercise name here..."),
+              ),
             ),
-          ),
-          //Weight
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
-            child: TextField(
-              controller: weightNameController,
-              style: TextStyle(color: Theme.of(context).colorScheme.surface),
-              decoration: InputDecoration(border: UnderlineInputBorder(), hintText: "Enter the weight here...", hintStyle: Theme.of(context).textTheme.displaySmall),
+            //Weight
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: TextField(
+                controller: weightNameController,
+                decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter the weight here..."),
+              ),
             ),
-          ),
-          //Reps
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
-            child: TextField(
-              controller: repsNameController,
-              style: TextStyle(color: Theme.of(context).colorScheme.surface),
-              decoration: InputDecoration(border: UnderlineInputBorder(), hintText: "Enter how many reps here...", hintStyle: Theme.of(context).textTheme.displaySmall),
+            //Reps
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: TextField(
+                controller: repsNameController,
+                decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter how many reps here..."),
+              ),
             ),
-          ),
-          //Sets
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
-            child: TextField(
-              controller: setsNameController,
-              style: TextStyle(color: Theme.of(context).colorScheme.surface),
-              decoration: InputDecoration(border: UnderlineInputBorder(), hintText: "Enter how many sets here...", hintStyle: Theme.of(context).textTheme.displaySmall),
-            ),
-          )
+            //Sets
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: TextField(
+                controller: setsNameController,
+                decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter how many sets here..."),
+              ),
+            )
+          ],
+        ),
+        actions: [
+          //Save button
+          MaterialButton(onPressed: save, child: Text("Save")),
+          //Cancel button
+          MaterialButton(onPressed: cancel, child: Text("Cancel"))
         ],
       ),
-      actions: [
-        //Save button
-        MaterialButton(onPressed: save, child: Text("Save", style: Theme.of(context).textTheme.displaySmall),),
-        //Cancel button
-        MaterialButton(onPressed: cancel, child: Text("Cancel", style: Theme.of(context).textTheme.displaySmall))
-      ],
     ));
+  }
+
+  void updateList(int oldIndex, int newIndex){
+    setState(() {
+      if(oldIndex < newIndex){
+        newIndex--;
+      }
+
+      List<Exercise> exerciseList = Provider.of<WorkoutData>(context, listen: false).getRelevantWorkout(widget.workoutName).exercises;
+
+      final tile = exerciseList.removeAt(oldIndex);
+
+      exerciseList.insert(newIndex, tile);
+
+      Provider.of<WorkoutData>(context, listen: false).updateWhenReorderedExerciseList(widget.workoutName, exerciseList);
+    });
   }
 
   @override
@@ -119,9 +133,11 @@ class _WorkoutpageState extends State<Workoutpage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
-        child: ListView.builder(
+        child: ReorderableListView.builder(
+            onReorder: (oldIndex, newIndex) => updateList(oldIndex, newIndex),
             itemCount: value.numberOfExerciseInWorkout(widget.workoutName),
             itemBuilder: (context, index) => ExerciseTile(
+              key:Key("$index"),
               exerciseName: value.getRelevantWorkout(widget.workoutName).exercises[index].name, 
               weight: value.getRelevantWorkout(widget.workoutName).exercises[index].weight, 
               reps: value.getRelevantWorkout(widget.workoutName).exercises[index].reps, 
@@ -129,7 +145,8 @@ class _WorkoutpageState extends State<Workoutpage> {
               isCompleted: value.getRelevantWorkout(widget.workoutName).exercises[index].isCompleted,
               onCheckboxChanged: (val) => onCheckBoxChange(widget.workoutName, value.getRelevantWorkout(widget.workoutName).exercises[index].name),
               workoutContainingExerciseName: widget.workoutName
-            )
+            ),
+            
             ),
       )
     )

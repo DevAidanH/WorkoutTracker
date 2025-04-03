@@ -227,6 +227,14 @@ class WorkoutData extends ChangeNotifier {
       );
   }
 
+  //Update exercise list when reordered
+  void updateWhenReorderedExerciseList(String workoutName, List<Exercise> excerises){
+    Workout relevantWorkout = getRelevantWorkout(workoutName);
+    relevantWorkout.exercises = excerises;
+    notifyListeners();
+    db.saveToDatabase(workoutList);
+  }
+
   //Check off exercise
   void checkOffExercise(String workoutName, String exerciseName){
     Exercise relevantExercise = getRelevantExercise(workoutName, exerciseName);
