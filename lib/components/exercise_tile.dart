@@ -12,7 +12,7 @@ class ExerciseTile extends StatelessWidget {
   final void Function(bool?)? onCheckboxChanged;
   final String workoutContainingExerciseName;
 
-  ExerciseTile({
+  const ExerciseTile({
     super.key, 
     required this.exerciseName, 
     required this.weight, 
@@ -64,17 +64,17 @@ class ExerciseTile extends StatelessWidget {
                       spacing: 10,
                       children: [
                         Chip(
-                          label: Text("${weight}kg", style: Theme.of(context).textTheme.displaySmall,), 
+                          label: Text("$weight kg", style: Theme.of(context).textTheme.displaySmall,), 
                           backgroundColor: Theme.of(context).colorScheme.tertiary,
                           padding: EdgeInsets.all(0),
                         ),
                         Chip(
-                          label: Text("${reps} reps", style: Theme.of(context).textTheme.displaySmall), 
+                          label: Text("$reps reps", style: Theme.of(context).textTheme.displaySmall), 
                           backgroundColor: Theme.of(context).colorScheme.tertiary,
                           padding: EdgeInsets.all(0),
                         ),
                         Chip(
-                          label: Text("${sets} sets", style: Theme.of(context).textTheme.displaySmall), 
+                          label: Text("$sets sets", style: Theme.of(context).textTheme.displaySmall), 
                           backgroundColor: Theme.of(context).colorScheme.tertiary,
                           padding: EdgeInsets.all(0),
                         )

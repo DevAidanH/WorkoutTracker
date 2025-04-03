@@ -13,6 +13,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
 
+  @override
   void initState(){
     super.initState();
 
@@ -29,7 +30,7 @@ class _HomepageState extends State<Homepage> {
       builder: (context) => AlertDialog(
         title: Text("Create New Workout"),
         backgroundColor: Theme.of(context).colorScheme.surface,
-        content: TextField(
+        content: TextField( 
           controller: newWorkoutNameController,
           decoration: InputDecoration(border: UnderlineInputBorder(), labelText: "Enter workout name here..."),
         ),
